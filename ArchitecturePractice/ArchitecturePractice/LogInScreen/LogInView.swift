@@ -51,7 +51,6 @@ final class  LogInView: UIView
 	
 	func setContent() {
 		self.loginTextField.placeholder = "Write your number"
-//		self.loginTextField.backgroundColor = .gray
 		self.loginTextField.borderStyle = .roundedRect
 		
 		self.codeTextField.placeholder = "Write auth code"
@@ -60,10 +59,14 @@ final class  LogInView: UIView
 		
 		self.getCodeButton.setTitle("Get auth code", for: .normal)
 		self.getCodeButton.backgroundColor = .systemGreen
+		self.getCodeButton.layer.cornerRadius = 19
+		self.getCodeButton.clipsToBounds = true
 		self.getCodeButton.addTarget(self, action: #selector(self.codeButtonTap), for: .touchDown)
 		
 		self.logInButton.setTitle("Log In", for: .normal)
 		self.logInButton.backgroundColor = .systemGreen
+		self.logInButton.layer.cornerRadius = 19
+		self.logInButton.clipsToBounds = true
 		self.logInButton.addTarget(self, action: #selector(self.logInButtonTap), for: .touchDown)
 		self.logInButton.isHidden = true
 	}
