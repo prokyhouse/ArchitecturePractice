@@ -24,6 +24,20 @@ final class BlogPostViewController: UIViewController {
 	override func loadView() {
 		super.loadView()
 		self.blogPostView?.loadView(controller: self)
+		self.updateData()
+	}
+
+	private func updateData() {
+		guard
+			let dataModel = self.blogPostModel
+		else {
+			return
+		}
+
+		self.blogPostView?.update(imageName: dataModel.getImageName(),
+								  title: dataModel.getTitle(),
+								  author: dataModel.getAuthor(),
+								  text: dataModel.getText())
 	}
 
 	override func viewDidLoad() {

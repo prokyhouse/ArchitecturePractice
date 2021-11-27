@@ -88,4 +88,11 @@ final class BlogPostView: UIView {
 	func loadView(controller: BlogPostViewController) {
 		self.controller = controller
 	}
+
+	func update(imageName: String, title: String?, author: String?, text: String?) {
+		self.imageBlock.image = UIImage(named: imageName)
+		self.title.text = title
+		self.author.text = author
+		self.text.text = text
+	}
 }
