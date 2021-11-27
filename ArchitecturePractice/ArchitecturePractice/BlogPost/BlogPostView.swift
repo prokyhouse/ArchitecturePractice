@@ -16,6 +16,7 @@ final class BlogPostView: UIView {
 		let obj = UIImageView()
 		obj.backgroundColor = .gray
 		obj.layer.cornerRadius = 8
+		obj.clipsToBounds = true
 		return obj
 	}()
 
