@@ -21,11 +21,10 @@ final class  LogInView: UIView
 		self.setContent()
 		self.backgroundColor = .white
 		
-		
 		self.addSubview(self.loginTextField)
 		self.loginTextField.snp.makeConstraints { maker in
 			maker.left.right.equalToSuperview().inset(20)
-			maker.top.equalToSuperview().offset(80)
+			maker.top.equalToSuperview().offset(100)
 		}
 		
 		self.addSubview(self.codeTextField)
@@ -45,8 +44,6 @@ final class  LogInView: UIView
 			maker.left.right.equalToSuperview().inset(20)
 			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(20)
 		}
-		
-		
 	}
 	
 	func setContent() {

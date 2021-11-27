@@ -28,7 +28,6 @@ class LogInViewController: UIViewController {
 	
 	func configureTitle() {
 		self.navigationItem.title = "Log In"
-//		self.navigationItem.largeTitleDisplayMode = .always
 	}
 	
 
@@ -37,6 +36,7 @@ class LogInViewController: UIViewController {
         let feedVC = FeedTableViewController()
         navigationController?.pushViewController(feedVC, animated: true)
 	}
+	
 	func showCode() {
 		print("Your code: 1234")
 	}
