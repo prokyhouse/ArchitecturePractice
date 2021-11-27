@@ -25,7 +25,8 @@ class LogInViewController: UIViewController {
 
 	func push() {
 		print("working")
-		//self.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+        let feedVC = FeedTableViewController()
+        navigationController?.pushViewController(feedVC, animated: true)
 	}
 }
 
