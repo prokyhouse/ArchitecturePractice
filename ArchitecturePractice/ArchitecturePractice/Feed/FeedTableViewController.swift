@@ -44,11 +44,11 @@ class FeedTableViewController: UITableViewController {
 
      // MARK: - Table view delegate
      
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let feed = feeds[indexPath.row]
-//        let feedVC = FeedVC()
-//        navigationController?.pushViewController(feedVC, animated: true)
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let feed = feeds[indexPath.row]
+        let postVC = BlogPostViewController()
+        navigationController?.pushViewController(postVC, animated: false)
+    }
 
 }
 

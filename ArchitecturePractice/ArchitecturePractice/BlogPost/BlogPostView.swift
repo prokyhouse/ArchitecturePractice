@@ -17,6 +17,7 @@ final class BlogPostView: UIView {
 		obj.backgroundColor = .gray
 		obj.layer.cornerRadius = 8
 		obj.clipsToBounds = true
+		obj.contentMode = .scaleAspectFill
 		return obj
 	}()
 
@@ -62,7 +63,9 @@ final class BlogPostView: UIView {
 	private func setConstraints() {
 		self.imageBlock.snp.makeConstraints { make in
 			make.left.right.equalToSuperview().inset(16)
-			make.top.equalTo(self.snp.top).offset(76)
+			make.top.equalTo(self.snp.top).offset(90)
+
+			make.height.equalTo(196)
 		}
 
 		self.title.snp.makeConstraints { make in
