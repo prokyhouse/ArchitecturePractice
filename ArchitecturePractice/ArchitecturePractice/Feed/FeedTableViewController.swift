@@ -19,8 +19,15 @@ class FeedTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
 		tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 16)
+		let logOut = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logOut))
+		navigationItem.leftBarButtonItem = logOut
         navigationItem.title = "Feed"
     }
+
+	@objc
+	private func logOut() {
+		_ = navigationController?.popViewController(animated: true)
+	}
 
     // MARK: - Table view data source
 
