@@ -46,7 +46,9 @@ class FeedTableViewController: UITableViewController {
      
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feed = feeds[indexPath.row]
-        let postVC = BlogPostViewController()
+		let postModel = BlogPostModel()
+		postModel.setData(imageName: feed.image, title: feed.title, author: "ddd", text: feed.description)
+        let postVC = BlogPostViewController(model: postModel)
         navigationController?.pushViewController(postVC, animated: false)
     }
 

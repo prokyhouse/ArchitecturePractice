@@ -42,7 +42,8 @@ final class BlogPostView: UIView {
 	private lazy var text: UILabel = {
 		let obj = UILabel()
 		obj.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-		obj.numberOfLines = 1
+		obj.numberOfLines = 20
+		obj.sizeToFit()
 		obj.adjustsFontSizeToFitWidth = true
 		obj.textAlignment = .left
 		return obj
@@ -85,7 +86,6 @@ final class BlogPostView: UIView {
 		self.text.snp.makeConstraints { make in
 			make.left.right.equalToSuperview().inset(16)
 			make.top.equalTo(self.author.snp.bottom).offset(16)
-			make.bottom.equalTo(self.snp.bottom).offset(-16)
 		}
 	}
 

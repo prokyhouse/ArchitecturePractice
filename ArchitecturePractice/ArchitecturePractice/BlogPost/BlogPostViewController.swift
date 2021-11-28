@@ -11,9 +11,9 @@ final class BlogPostViewController: UIViewController {
 	private var blogPostView: BlogPostView?
 	private var blogPostModel: BlogPostModel?
 
-	init() {
+	init(model: BlogPostModel) {
 		self.blogPostView = BlogPostView(frame: UIScreen.main.bounds)
-		self.blogPostModel = BlogPostModel()
+		self.blogPostModel = model
 		super.init(nibName: nil, bundle: nil)
 	}
 
