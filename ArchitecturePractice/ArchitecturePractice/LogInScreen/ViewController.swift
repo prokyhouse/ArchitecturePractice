@@ -8,7 +8,7 @@
 import UIKit
 
 class LogInViewController: UIViewController {
-	
+
 	override func loadView() {
 		super.loadView()
 		self.configureTitle()
@@ -23,22 +23,20 @@ class LogInViewController: UIViewController {
 			return view
 		}()
 		self.view = loginView
-		
+
 	}
-	
+
 	func configureTitle() {
 		self.navigationItem.title = "Log In"
 	}
-	
 
 	func push() {
 		print("working")
         let feedVC = FeedTableViewController()
         navigationController?.pushViewController(feedVC, animated: true)
 	}
-	
+
 	func showCode() {
 		print("Your code: 1234")
 	}
 }
-

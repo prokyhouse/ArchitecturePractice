@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class FeedTableViewCell: UITableViewCell {
-    
+
     private lazy var image: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
@@ -18,15 +18,15 @@ class FeedTableViewCell: UITableViewCell {
         img.clipsToBounds = true
         return img
     }()
-    
-    private lazy var titleLabel:UILabel = {
+
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 19)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private lazy var descriptionLabel:UILabel = {
+
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
 		label.sizeToFit()
@@ -34,10 +34,10 @@ class FeedTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.contentView.addSubview(image)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
@@ -62,14 +62,14 @@ class FeedTableViewCell: UITableViewCell {
 			make.left.equalTo(self.image.snp.right).offset(16)
 			make.top.equalTo(self.titleLabel.snp.bottom).offset(8)
 			make.right.equalToSuperview().offset(-16)
-			//make.bottom.equalToSuperview().inset(16)
+			// make.bottom.equalToSuperview().inset(16)
 		}
 	}
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     func setup(with feed: Feed) {
         image.image = UIImage(named: feed.image)
         titleLabel.text = feed.title

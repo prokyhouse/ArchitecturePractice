@@ -9,11 +9,10 @@ import UIKit
 
 class FeedTableViewController: UITableViewController {
 
-    
     private enum Constants {
         static let reuseIdentifier = "Cell"
     }
-    
+
     let feeds = Feed.data
 
     override func viewDidLoad() {
@@ -22,8 +21,6 @@ class FeedTableViewController: UITableViewController {
 		tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 16)
         navigationItem.title = "Feed"
     }
-    
-
 
     // MARK: - Table view data source
 
@@ -35,16 +32,16 @@ class FeedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! FeedTableViewCell
         let feed = feeds[indexPath.row]
         cell.setup(with: feed)
-    
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
 
      // MARK: - Table view delegate
-     
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feed = feeds[indexPath.row]
 		let postModel = BlogPostModel()
@@ -52,6 +49,4 @@ class FeedTableViewController: UITableViewController {
         let postVC = BlogPostViewController(model: postModel)
         navigationController?.pushViewController(postVC, animated: false)
     }
-
 }
-
