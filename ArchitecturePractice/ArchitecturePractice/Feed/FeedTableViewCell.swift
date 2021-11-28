@@ -62,7 +62,6 @@ class FeedTableViewCell: UITableViewCell {
 			make.left.equalTo(self.image.snp.right).offset(16)
 			make.top.equalTo(self.titleLabel.snp.bottom).offset(8)
 			make.right.equalToSuperview().offset(-16)
-			// make.bottom.equalToSuperview().inset(16)
 		}
 	}
 

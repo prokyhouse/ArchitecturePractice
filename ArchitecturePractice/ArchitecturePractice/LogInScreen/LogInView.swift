@@ -17,28 +17,35 @@ final class  LogInView: UIView {
 	private let codeTextField = UITextField()
 
 	func configureView() {
-		self.setContent()
 		self.backgroundColor = .white
+		self.setContent()
+		self.addSubviews()
+		self.setConstraints()
+	}
 
+	private func addSubviews() {
 		self.addSubview(self.loginTextField)
+		self.addSubview(self.codeTextField)
+		self.addSubview(self.getCodeButton)
+		self.addSubview(self.logInButton)
+	}
+
+	private func setConstraints() {
 		self.loginTextField.snp.makeConstraints { maker in
 			maker.left.right.equalToSuperview().inset(20)
 			maker.top.equalToSuperview().offset(100)
 		}
 
-		self.addSubview(self.codeTextField)
 		self.codeTextField.snp.makeConstraints { maker in
 			maker.top.equalTo(self.loginTextField.snp.bottom).offset(5)
 			maker.left.right.equalToSuperview().inset(20)
 		}
 
-		self.addSubview(self.getCodeButton)
 		self.getCodeButton.snp.makeConstraints { maker in
 			maker.centerX.centerY.equalToSuperview()
 			maker.left.right.equalToSuperview().inset(20)
 		}
 
-		self.addSubview(self.logInButton)
 		self.logInButton.snp.makeConstraints { maker in
 			maker.left.right.equalToSuperview().inset(20)
 			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(20)
