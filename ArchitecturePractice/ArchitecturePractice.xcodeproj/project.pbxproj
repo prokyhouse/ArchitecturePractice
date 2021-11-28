@@ -89,9 +89,9 @@
 		F0DE62F227521E9B00FCDCB6 /* ArchitecturePractice */ = {
 			isa = PBXGroup;
 			children = (
-				F0DE630A275221E500FCDCB6 /* BlogPost */,
 				F0DE62F327521E9B00FCDCB6 /* AppDelegate.swift */,
 				F0DE62F527521E9B00FCDCB6 /* SceneDelegate.swift */,
+				F0DE630A275221E500FCDCB6 /* BlogPost */,
 				B63FA6DF2752273A00FDB760 /* LogInScreen */,
 				31B372422752379D00B0BFC6 /* Feed */,
 				F0DE62FC27521E9D00FCDCB6 /* Assets.xcassets */,

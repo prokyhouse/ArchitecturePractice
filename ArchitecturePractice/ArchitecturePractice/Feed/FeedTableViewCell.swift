@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class FeedTableViewCell: UITableViewCell {
     
@@ -13,7 +14,7 @@ class FeedTableViewCell: UITableViewCell {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
-        //    img.layer.cornerRadius = 35
+        img.layer.cornerRadius = 8
         img.clipsToBounds = true
         return img
     }()
@@ -27,7 +28,9 @@ class FeedTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel:UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+		label.sizeToFit()
+		label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -38,18 +41,30 @@ class FeedTableViewCell: UITableViewCell {
         self.contentView.addSubview(image)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
-        
-        image.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true
-        image.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
-        image.widthAnchor.constraint(equalToConstant:50).isActive = true
-        image.heightAnchor.constraint(equalToConstant:50).isActive = true
-        
-        titleLabel.topAnchor.constraint(equalTo:self.contentView.topAnchor, constant: 5).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo:self.image.leadingAnchor, constant: 100).isActive = true
-        
-        descriptionLabel.topAnchor.constraint(equalTo:self.titleLabel.bottomAnchor, constant: 10).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo:self.image.leadingAnchor, constant: 100).isActive = true
+
+		self.setConstraints()
     }
+
+	private func setConstraints() {
+		self.image.snp.makeConstraints { make in
+			make.left.top.equalToSuperview().offset(16)
+			make.bottom.equalToSuperview().inset(27)
+			make.height.equalTo(self.image.snp.width)
+		}
+
+		self.titleLabel.snp.makeConstraints { make in
+			make.left.equalTo(self.image.snp.right).offset(16)
+			make.top.equalToSuperview().offset(16)
+			make.right.equalToSuperview().offset(-16)
+		}
+
+		self.descriptionLabel.snp.makeConstraints { make in
+			make.left.equalTo(self.image.snp.right).offset(16)
+			make.top.equalTo(self.titleLabel.snp.bottom).offset(8)
+			make.right.equalToSuperview().offset(-16)
+			//make.bottom.equalToSuperview().inset(16)
+		}
+	}
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

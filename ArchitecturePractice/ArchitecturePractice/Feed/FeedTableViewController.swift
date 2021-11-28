@@ -19,6 +19,7 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
+		tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 16)
         navigationItem.title = "Feed"
     }
     
@@ -39,7 +40,7 @@ class FeedTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 90
     }
 
      // MARK: - Table view delegate
@@ -47,7 +48,7 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feed = feeds[indexPath.row]
 		let postModel = BlogPostModel()
-		postModel.setData(imageName: feed.image, title: feed.title, author: "ddd", text: feed.description)
+		postModel.setData(imageName: feed.image, title: feed.title, author: "No author", text: feed.description)
         let postVC = BlogPostViewController(model: postModel)
         navigationController?.pushViewController(postVC, animated: false)
     }
