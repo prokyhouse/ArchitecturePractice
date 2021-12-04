@@ -41,6 +41,16 @@ final class  LogInView: UIView
 
 private extension LogInView
 {
+	private enum Metrics
+	{
+		static let leftRightOffset = 16
+		static let loginTFTopMargin = 135
+		static let loginTFToCodeTFMargin = 9
+		static let codeTFToCodeButtonMargin = 100
+		static let codeButtonToLoginButtonMargin = 16
+		static let buttonCornerRadius: CGFloat = 19
+	}
+	
 	private func addSubviews() {
 		self.addSubview(self.loginTextField)
 		self.addSubview(self.codeTextField)
@@ -50,23 +60,23 @@ private extension LogInView
 
 	private func setConstraints() {
 		self.loginTextField.snp.makeConstraints { maker in
-			maker.left.right.equalToSuperview().inset(16)
-			maker.top.equalToSuperview().offset(135)
+			maker.left.right.equalToSuperview().inset(Metrics.leftRightOffset)
+			maker.top.equalToSuperview().offset(Metrics.loginTFTopMargin)
 		}
 
 		self.codeTextField.snp.makeConstraints { maker in
-			maker.top.equalTo(self.loginTextField.snp.bottom).offset(9)
-			maker.left.right.equalToSuperview().inset(16)
+			maker.top.equalTo(self.loginTextField.snp.bottom).offset(Metrics.loginTFToCodeTFMargin)
+			maker.left.right.equalToSuperview().inset(Metrics.leftRightOffset)
 		}
 
 		self.getCodeButton.snp.makeConstraints { maker in
-			maker.top.equalTo(self.codeTextField.snp.bottom).offset(100)
-			maker.left.right.equalToSuperview().inset(16)
+			maker.top.equalTo(self.codeTextField.snp.bottom).offset(Metrics.codeTFToCodeButtonMargin)
+			maker.left.right.equalToSuperview().inset(Metrics.leftRightOffset)
 		}
 
 		self.logInButton.snp.makeConstraints { maker in
-			maker.left.right.equalToSuperview().inset(16)
-			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(16)
+			maker.left.right.equalToSuperview().inset(Metrics.leftRightOffset)
+			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(Metrics.codeButtonToLoginButtonMargin)
 		}
 	}
 
@@ -80,13 +90,13 @@ private extension LogInView
 
 		self.getCodeButton.setTitle(data.codeButtonTitle, for: .normal)
 		self.getCodeButton.backgroundColor = .systemGreen
-		self.getCodeButton.layer.cornerRadius = 19
+		self.getCodeButton.layer.cornerRadius = Metrics.buttonCornerRadius
 		self.getCodeButton.clipsToBounds = true
 		self.getCodeButton.addTarget(self, action: #selector(self.codeButtonTap), for: .touchDown)
 
 		self.logInButton.setTitle(data.loginButtonTitle, for: .normal)
 		self.logInButton.backgroundColor = .systemGreen
-		self.logInButton.layer.cornerRadius = 19
+		self.logInButton.layer.cornerRadius = Metrics.buttonCornerRadius
 		self.logInButton.clipsToBounds = true
 		self.logInButton.addTarget(self, action: #selector(self.logInButtonTap), for: .touchDown)
 		self.logInButton.isHidden = true

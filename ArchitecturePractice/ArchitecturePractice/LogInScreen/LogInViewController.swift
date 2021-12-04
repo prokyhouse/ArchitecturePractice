@@ -57,7 +57,7 @@ private extension LogInViewController
 	}
 
 	private func showCode() {
-		self.authCode = Int(arc4random_uniform(9999))
+		self.authCode = Int.random(in: 0001...9999)
 		guard let code = self.authCode else { return }
 		print("Your code: \(code)")
 	}
