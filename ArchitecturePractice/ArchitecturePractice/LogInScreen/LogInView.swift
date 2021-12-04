@@ -32,23 +32,23 @@ final class  LogInView: UIView {
 
 	private func setConstraints() {
 		self.loginTextField.snp.makeConstraints { maker in
-			maker.left.right.equalToSuperview().inset(20)
-			maker.top.equalToSuperview().offset(100)
+			maker.left.right.equalToSuperview().inset(16)
+			maker.top.equalToSuperview().offset(135)
 		}
 
 		self.codeTextField.snp.makeConstraints { maker in
-			maker.top.equalTo(self.loginTextField.snp.bottom).offset(5)
-			maker.left.right.equalToSuperview().inset(20)
+			maker.top.equalTo(self.loginTextField.snp.bottom).offset(9)
+			maker.left.right.equalToSuperview().inset(16)
 		}
 
 		self.getCodeButton.snp.makeConstraints { maker in
-			maker.centerX.centerY.equalToSuperview()
-			maker.left.right.equalToSuperview().inset(20)
+			maker.top.equalTo(self.codeTextField.snp.bottom).offset(100)
+			maker.left.right.equalToSuperview().inset(16)
 		}
 
 		self.logInButton.snp.makeConstraints { maker in
-			maker.left.right.equalToSuperview().inset(20)
-			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(20)
+			maker.left.right.equalToSuperview().inset(16)
+			maker.top.equalTo(self.getCodeButton.snp.bottom).offset(16)
 		}
 	}
 
