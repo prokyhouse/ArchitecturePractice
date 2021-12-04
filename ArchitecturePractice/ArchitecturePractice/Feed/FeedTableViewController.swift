@@ -8,7 +8,7 @@
 import UIKit
 
 class FeedTableViewController: UITableViewController {
-
+    
     private enum Constants {
         static let reuseIdentifier = "Cell"
         static let textBack = "Log out"
@@ -21,7 +21,7 @@ class FeedTableViewController: UITableViewController {
         static let heightForRowAt: CGFloat = 90
         static let waitSeconds: Double = 2.0
     }
-
+    
     var feeds = Feed().getSampleData()
     
     override func viewDidLoad() {
@@ -32,46 +32,46 @@ class FeedTableViewController: UITableViewController {
                                                 bottom: Constants.separatorInsetBottomEdge,
                                                 right: Constants.separatorInsetRightEdge)
         let logOut = UIBarButtonItem(title: Constants.textBack, style: .plain, target: self, action: #selector(logOut))
-		navigationItem.leftBarButtonItem = logOut
+        navigationItem.leftBarButtonItem = logOut
         navigationItem.title = Constants.title
         
         tableView.refreshControl = refreshCntrl
     }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feeds.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! FeedTableViewCell
-        let feed = feeds[indexPath.row]
-        cell.setup(with: feed)
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constants.heightForRowAt
-    }
-
-     // MARK: - Table view delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let feed = feeds[indexPath.row]
-		let postModel = BlogPostModel()
-        postModel.setData(imageName: feed.getImage(), title: feed.getTitle(), author: feed.getAuthor(), text: feed.getDescription())
-        let postVC = BlogPostViewController(model: postModel)
-        navigationController?.pushViewController(postVC, animated: false)
-    }
-    
-    // MARK: - Other Methods
     
     @objc
     private func logOut() {
         _ = navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feeds.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! FeedTableViewCell
+        let feed = feeds[indexPath.row]
+        cell.setup(with: feed)
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.heightForRowAt
+    }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let feed = feeds[indexPath.row]
+        let postModel = BlogPostModel()
+        postModel.setData(imageName: feed.getImage(), title: feed.getTitle(), author: feed.getAuthor(), text: feed.getDescription())
+        let postVC = BlogPostViewController(model: postModel)
+        navigationController?.pushViewController(postVC, animated: false)
+    }
+    
+    // MARK: - Эмуляция загрузки данных из сети
     
     let refreshCntrl: UIRefreshControl = {
         let refreshCntrl = UIRefreshControl()
