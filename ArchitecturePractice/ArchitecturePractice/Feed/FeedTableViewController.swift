@@ -13,23 +13,30 @@ class FeedTableViewController: UITableViewController {
         static let reuseIdentifier = "Cell"
         static let textBack = "Log out"
         static let title = "Feed"
+        
+        static let separatorInsetLeftEdge: CGFloat = 80
+        static let separatorInsetRightEdge: CGFloat = 80
+        static let separatorInsetTopEdge: CGFloat = 0
+        static let separatorInsetBottomEdge: CGFloat = 0
+        static let heightForRowAt: CGFloat = 90
+        static let waitSeconds: Double = 2.0
     }
 
-    let feeds = Feed().getSampleData()
-
+    var feeds = Feed().getSampleData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
-		tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 16)
+        tableView.separatorInset = UIEdgeInsets(top: Constants.separatorInsetTopEdge,
+                                                left: Constants.separatorInsetLeftEdge,
+                                                bottom: Constants.separatorInsetBottomEdge,
+                                                right: Constants.separatorInsetRightEdge)
         let logOut = UIBarButtonItem(title: Constants.textBack, style: .plain, target: self, action: #selector(logOut))
 		navigationItem.leftBarButtonItem = logOut
         navigationItem.title = Constants.title
+        
+        tableView.refreshControl = refreshCntrl
     }
-
-	@objc
-	private func logOut() {
-		_ = navigationController?.popViewController(animated: true)
-	}
 
     // MARK: - Table view data source
 
@@ -46,7 +53,7 @@ class FeedTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return Constants.heightForRowAt
     }
 
      // MARK: - Table view delegate
@@ -57,5 +64,31 @@ class FeedTableViewController: UITableViewController {
         postModel.setData(imageName: feed.getImage(), title: feed.getTitle(), author: feed.getAuthor(), text: feed.getDescription())
         let postVC = BlogPostViewController(model: postModel)
         navigationController?.pushViewController(postVC, animated: false)
+    }
+    
+    // MARK: - Other Methods
+    
+    @objc
+    private func logOut() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
+    let refreshCntrl: UIRefreshControl = {
+        let refreshCntrl = UIRefreshControl()
+        refreshCntrl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshCntrl
+    }()
+    
+    @objc private func refresh() {
+        run(after: Constants.waitSeconds) {
+            self.feeds = Feed().getUpdateData()
+            self.tableView.reloadData()
+            self.refreshCntrl.endRefreshing()
+        }
+    }
+    
+    private func run(after wait: TimeInterval, closure: @escaping () -> Void) {
+        let queue = DispatchQueue.main
+        queue.asyncAfter(deadline: DispatchTime.now() + wait, execute: closure)
     }
 }
