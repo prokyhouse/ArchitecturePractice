@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 final class BlogPostView: UIView {
-    private weak var controller: BlogPostViewController?
     
     private lazy var imageBlock: UIImageView = {
         let obj = UIImageView()
@@ -104,10 +103,6 @@ final class BlogPostView: UIView {
             
             make.bottom.equalToSuperview()
         }
-    }
-    
-    func loadView(controller: BlogPostViewController) {
-        self.controller = controller
     }
     
     func update(imageName: String, title: String?, author: String?, text: String?) {

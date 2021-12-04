@@ -23,7 +23,6 @@ final class BlogPostViewController: UIViewController {
 
 	override func loadView() {
 		super.loadView()
-		self.blogPostView?.loadView(controller: self)
 		self.updateData()
 	}
 
