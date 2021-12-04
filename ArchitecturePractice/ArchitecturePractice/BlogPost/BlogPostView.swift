@@ -61,31 +61,32 @@ final class BlogPostView: UIView {
     }
     
     private func addSubviews() {
-        self.addSubview(self.imageBlock)
         self.addSubview(self.scrollView)
-    
+        self.scrollView.addSubview(self.imageBlock)
         self.scrollView.addSubview(self.title)
         self.scrollView.addSubview(self.author)
         self.scrollView.addSubview(self.text)
     }
     
     private func setConstraints() {
-        self.imageBlock.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(self.snp.top).offset(90)
-            
-            make.height.equalTo(196)
-        }
         
         self.scrollView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(self.imageBlock.snp.bottom).offset(32)
+            make.top.equalTo(self.snp.topMargin)
             make.bottom.equalToSuperview().offset(-32)
+        }
+        
+        self.imageBlock.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.width.equalToSuperview()
+
+            make.height.equalTo(196)
         }
         
         self.title.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalTo(self.imageBlock.snp.bottom).offset(32)
             
             make.height.lessThanOrEqualTo(29)
         }
