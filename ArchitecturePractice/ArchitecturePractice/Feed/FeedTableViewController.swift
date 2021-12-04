@@ -54,6 +54,6 @@ class FeedTableViewController: UITableViewController {
 		let postModel = BlogPostModel()
 		postModel.setData(imageName: feed.image, title: feed.title, author: "No author", text: feed.description)
         let postVC = BlogPostViewController(model: postModel)
-        navigationController?.pushViewController(postVC, animated: false)
+        navigationController?.pushViewController(postVC, animated: true)
     }
 }

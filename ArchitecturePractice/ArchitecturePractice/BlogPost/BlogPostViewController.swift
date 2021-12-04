@@ -42,13 +42,11 @@ final class BlogPostViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-	}
-
-	override func viewDidAppear(_ animated: Bool) {
-		self.blogPostView?.configure()
-		self.blogPostView?.backgroundColor = .white
-		if let blogPostView = blogPostView {
-			self.view.addSubview(blogPostView)
-		}
+        
+        self.blogPostView?.configure()
+        self.blogPostView?.backgroundColor = .white
+        if let blogPostView = blogPostView {
+            self.view.addSubview(blogPostView)
+        }
 	}
 }
