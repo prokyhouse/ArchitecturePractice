@@ -8,21 +8,41 @@
 import UIKit
 import SnapKit
 
-final class  LogInView: UIView {
+final class  LogInView: UIView
+{
 	var codeButtonTapHandler: (() -> Void)?
-	var loginButtonTapHandler: (() -> Void)?
+	var loginButtonTapHandler: ((Int) -> Void)?
+	
 	private let logInButton = UIButton()
 	private let getCodeButton = UIButton()
 	private let loginTextField = UITextField()
 	private let codeTextField = UITextField()
+	private var wrongPlaceHolder: String?
 
-	func configureView() {
+	func configureView(with data: ResourseModel) {
 		self.backgroundColor = .white
-		self.setContent()
+		self.setContent(data: data)
 		self.addSubviews()
 		self.setConstraints()
+		self.wrongPlaceHolder = data.wrongCodePlaceHolder
+	}
+	
+	func resetTextField() {
+		self.codeTextField.text = ""
+		self.codeTextField.placeholder = self.wrongPlaceHolder
 	}
 
+	init() {
+		super.init(frame: .zero)
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+}
+
+private extension LogInView
+{
 	private func addSubviews() {
 		self.addSubview(self.loginTextField)
 		self.addSubview(self.codeTextField)
@@ -52,39 +72,31 @@ final class  LogInView: UIView {
 		}
 	}
 
-	func setContent() {
-		self.loginTextField.placeholder = "Write your number"
+	private func setContent(data: ResourseModel) {
+		self.loginTextField.placeholder = data.loginPlaceHolder
 		self.loginTextField.borderStyle = .roundedRect
 
-		self.codeTextField.placeholder = "Write auth code"
+		self.codeTextField.placeholder = data.codePlaceHolder
 		self.codeTextField.borderStyle = .roundedRect
 		self.codeTextField.isHidden = true
 
-		self.getCodeButton.setTitle("Get auth code", for: .normal)
+		self.getCodeButton.setTitle(data.codeButtonTitle, for: .normal)
 		self.getCodeButton.backgroundColor = .systemGreen
 		self.getCodeButton.layer.cornerRadius = 19
 		self.getCodeButton.clipsToBounds = true
 		self.getCodeButton.addTarget(self, action: #selector(self.codeButtonTap), for: .touchDown)
 
-		self.logInButton.setTitle("Log In", for: .normal)
+		self.logInButton.setTitle(data.loginButtonTitle, for: .normal)
 		self.logInButton.backgroundColor = .systemGreen
 		self.logInButton.layer.cornerRadius = 19
 		self.logInButton.clipsToBounds = true
 		self.logInButton.addTarget(self, action: #selector(self.logInButtonTap), for: .touchDown)
 		self.logInButton.isHidden = true
 	}
-
-	init() {
-		super.init(frame: .zero)
-		self.configureView()
-	}
-
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
+	
 	@objc private func logInButtonTap() {
-		self.loginButtonTapHandler?()
+		guard let text = self.codeTextField.text, let code = Int(text) else { return }
+		self.loginButtonTapHandler?(code)
 	}
 
 	@objc private func codeButtonTap() {
