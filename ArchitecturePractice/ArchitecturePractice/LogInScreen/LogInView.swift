@@ -17,19 +17,17 @@ final class  LogInView: UIView
 	private let getCodeButton = UIButton()
 	private let loginTextField = UITextField()
 	private let codeTextField = UITextField()
-	private var wrongPlaceHolder: String?
 
-	func configureView(with data: ResourseModel) {
+	func configureView(with data: ResourseModelData) {
 		self.backgroundColor = .white
 		self.setContent(data: data)
 		self.addSubviews()
 		self.setConstraints()
-		self.wrongPlaceHolder = data.wrongCodePlaceHolder
 	}
 	
-	func resetTextField() {
+	func resetTextField(with data: ResourseModelData) {
 		self.codeTextField.text = ""
-		self.codeTextField.placeholder = self.wrongPlaceHolder
+		self.codeTextField.placeholder = data.wrongCodePlaceHolder
 	}
 
 	init() {
@@ -72,7 +70,7 @@ private extension LogInView
 		}
 	}
 
-	private func setContent(data: ResourseModel) {
+	private func setContent(data: ResourseModelData) {
 		self.loginTextField.placeholder = data.loginPlaceHolder
 		self.loginTextField.borderStyle = .roundedRect
 

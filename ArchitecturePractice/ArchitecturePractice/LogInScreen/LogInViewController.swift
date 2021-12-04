@@ -15,7 +15,8 @@ class LogInViewController: UIViewController
 
 	private lazy var loginView: LogInView = {
 		let view = LogInView()
-		view.configureView(with: self.resourseModel)
+		let data = self.resourseModel.getResourse()
+		view.configureView(with: data)
 
 		view.loginButtonTapHandler = {[weak self] code in
 			self?.checkCode(code: code)
@@ -37,14 +38,15 @@ class LogInViewController: UIViewController
 private extension LogInViewController
 {
 	private func configureTitle() {
-		self.navigationItem.title = self.resourseModel.navTitle
+		self.navigationItem.title = self.resourseModel.getResourse().navTitle
 	}
 
 	private func checkCode(code: Int) {
 		if code == self.authCode {
 			self.push()
 		} else {
-			self.loginView.resetTextField()
+			let data = self.resourseModel.getFailureResourse()
+			self.loginView.resetTextField(with: data)
 		}
 	}
 
