@@ -58,5 +58,16 @@ final class Feed {
         
         return feeds
     }
+    
+    func getUpdateData() -> [Feed] {
+        var feeds: [Feed] = []
+        for i in stride(from: 4, to: 0, by: -1) {
+            let feed = Feed()
+            feed.setData(title: "Title Feed \(i)", description: "Labore sunt veniam amet est. Minim nisi dolor eu ad incididunt cillum elit ex ut. Dolore exercitation nulla tempor consequat aliquip occaecat. Nisi id ipsum irure aute. Deserunt sit aute irure quis nulla eu consequat fugiat Lorem sunt magna et consequat labore. Laboris incididunt id Lorem est duis deserunt nisi dolore eiusmod culpa exercitation consectetur", author: "Author \(i)", image: "\(i).jpg")
+            feeds.append(feed)
+        }
+        
+        return feeds
+    }
 }
 
