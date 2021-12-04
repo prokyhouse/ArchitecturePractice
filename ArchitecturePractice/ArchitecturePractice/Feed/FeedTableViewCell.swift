@@ -12,8 +12,8 @@ class FeedTableViewCell: UITableViewCell {
 
     private lazy var image: UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
-        img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
+        img.contentMode = .scaleAspectFill
+        img.translatesAutoresizingMaskIntoConstraints = false
         img.layer.cornerRadius = 8
         img.clipsToBounds = true
         return img
@@ -70,7 +70,7 @@ class FeedTableViewCell: UITableViewCell {
     }
 
     func setup(with feed: Feed) {
-        image.image = UIImage(named: feed.image)
+        image.image = UIImage(named: feed.image ?? "1.jpg")
         titleLabel.text = feed.title
         descriptionLabel.text = feed.description
     }
