@@ -11,10 +11,24 @@ import SnapKit
 
 final class BlogPostView: UIView {
     
+    private enum Metrics {
+        static let imageCornerRadius = CGFloat(8)
+        static let largeFontSize = CGFloat(30)
+        static let mediumFontSize = CGFloat(16)
+        
+        static let imageHeight = 180
+        
+        static let smallVerticalSpacing = 8
+        static let mediumVerticalSpacing = 16
+        static let largeVerticalSpacing = 32
+        
+        static let horizontalSpacing = 16
+    }
+    
     private lazy var imageBlock: UIImageView = {
         let obj = UIImageView()
         obj.backgroundColor = .gray
-        obj.layer.cornerRadius = 8
+        obj.layer.cornerRadius = Metrics.imageCornerRadius
         obj.clipsToBounds = true
         obj.contentMode = .scaleAspectFill
         return obj
@@ -22,8 +36,7 @@ final class BlogPostView: UIView {
     
     private lazy var title: UILabel = {
         let obj = UILabel()
-        obj.font = UIFont.systemFont(ofSize: 30, weight: .medium)
-        obj.numberOfLines = 1
+        obj.font = UIFont.systemFont(ofSize: Metrics.largeFontSize, weight: .medium)
         obj.adjustsFontSizeToFitWidth = true
         obj.textAlignment = .left
         return obj
@@ -31,8 +44,7 @@ final class BlogPostView: UIView {
     
     private lazy var author: UILabel = {
         let obj = UILabel()
-        obj.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        obj.numberOfLines = 1
+        obj.font = UIFont.systemFont(ofSize: Metrics.mediumFontSize, weight: .semibold)
         obj.adjustsFontSizeToFitWidth = true
         obj.textAlignment = .left
         return obj
@@ -46,7 +58,7 @@ final class BlogPostView: UIView {
     
     private lazy var text: UILabel = {
         let obj = UILabel()
-        obj.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        obj.font = UIFont.systemFont(ofSize: Metrics.mediumFontSize, weight: .medium)
         obj.numberOfLines = 0
         obj.sizeToFit()
         obj.adjustsFontSizeToFitWidth = true
@@ -70,9 +82,9 @@ final class BlogPostView: UIView {
     private func setConstraints() {
         
         self.scrollView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(Metrics.horizontalSpacing)
             make.top.equalTo(self.snp.topMargin)
-            make.bottom.equalToSuperview().offset(-32)
+            make.bottom.equalToSuperview().inset(Metrics.largeVerticalSpacing)
         }
         
         self.imageBlock.snp.makeConstraints { make in
@@ -80,25 +92,21 @@ final class BlogPostView: UIView {
             make.left.right.equalToSuperview()
             make.width.equalToSuperview()
 
-            make.height.equalTo(196)
+            make.height.equalTo(Metrics.imageHeight)
         }
         
         self.title.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(self.imageBlock.snp.bottom).offset(32)
-            
-            make.height.lessThanOrEqualTo(29)
+            make.top.equalTo(self.imageBlock.snp.bottom).offset(Metrics.largeVerticalSpacing)
         }
         
         self.author.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(self.title.snp.bottom).offset(8)
-            
-            make.height.lessThanOrEqualTo(19)
+            make.top.equalTo(self.title.snp.bottom).offset(Metrics.smallVerticalSpacing)
         }
         
         self.text.snp.makeConstraints { make in
-            make.top.equalTo(self.author.snp.bottom).offset(16)
+            make.top.equalTo(self.author.snp.bottom).offset(Metrics.mediumVerticalSpacing)
             make.width.equalToSuperview()
             
             make.bottom.equalToSuperview()
